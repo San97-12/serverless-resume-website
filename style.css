@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@600;700&display=swap');
 
+/* Base Styles */
 body {
   margin: 0;
   background: #f4f7f6;
@@ -13,12 +14,13 @@ body {
   max-width: 900px;
   margin: 40px auto;
   background: #fff;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   padding: 40px 50px;
   box-sizing: border-box;
 }
 
+/* Header Styles */
 .header {
   text-align: center;
   margin-bottom: 40px;
@@ -38,6 +40,7 @@ body {
   color: #00796b;
 }
 
+/* Section Heading (e.g. Projects, Experience) */
 h2 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
@@ -48,18 +51,21 @@ h2 {
   padding-bottom: 6px;
 }
 
+/* Subheading (e.g. Job Titles, Project Names) */
 h3 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   color: #00695c;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-p, ul {
-  font-size: 1rem;
+/* Paragraphs and Lists (Details under projects/jobs) */
+p,
+ul {
+  font-size: 0.95rem;
   color: #3e4e56;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 ul {
@@ -67,9 +73,10 @@ ul {
 }
 
 ul li {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
+/* Skills Section */
 .skills-inline li {
   margin-bottom: 16px;
 }
@@ -81,27 +88,7 @@ ul li {
   margin-right: 8px;
 }
 
-/* Responsive */
-@media (max-width: 650px) {
-  .container {
-    padding: 30px 20px;
-    margin: 20px auto;
-  }
-
-  .header h1 {
-    font-size: 2.2rem;
-  }
-
-  h2 {
-    font-size: 1.7rem;
-  }
-
-  h3 {
-    font-size: 1.1rem;
-  }
-}
-
-/* Visitor Count Styling */
+/* Visitor Count Box */
 .visitor-count {
   max-width: 300px;
   margin: 30px auto;
@@ -122,5 +109,30 @@ ul li {
 @keyframes fadeIn {
   to {
     opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 650px) {
+  .container {
+    padding: 30px 20px;
+    margin: 20px auto;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p,
+  ul {
+    font-size: 0.9rem;
   }
 }

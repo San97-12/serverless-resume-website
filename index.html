@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sanjeevini Pujar - Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Sanjeevini Pujar</h1>
+      <p class="contact-info">sanjeevinip9@gmail.com | +91 6360890661</p>
+    </header>
+
+    <main class="resume-content">
+      <section class="summary">
+        <h2>Professional Summary</h2>
+        <p>
+          Backend Software Developer with 3 years of experience, mainly in fintech, skilled in Python, Django, REST APIs, and PostgreSQL.
+          Comfortable with full-stack development and data processing using Pandas and NumPy. Experienced with AWS, Docker, and API/database tools like Postman and DBeaver.
+          Versatile, reliable, and open to backend, data-focused, or full-stack roles.
+        </p>
+      </section>
+
+      <section aria-label="Skills">
+        <h2>Skills</h2>
+        <ul class="skills-inline">
+          <li><strong>Programming Languages:</strong> Python, SQL, JavaScript, HTML/CSS</li>
+          <li><strong>Frameworks &amp; Libraries:</strong> Django, REST API Development, Pandas, NumPy, xlwt</li>
+          <li><strong>Databases:</strong> PostgreSQL, MySQL, DynamoDB</li>
+          <li><strong>Cloud &amp; DevOps:</strong> AWS (EC2, S3, Lambda, API Gateway), Docker</li>
+          <li><strong>Testing:</strong> API Testing with Postman</li>
+          <li><strong>Operating Systems:</strong> Linux, Windows</li>
+          <li><strong>Tools &amp; Methodologies:</strong> Postman, DBeaver, Git, Jira (Agile Project Management)</li>
+        </ul>
+      </section>
+
+      <section class="experience">
+        <h2>Work Experience</h2>
+        <div class="job">
+          <h3>Backend Developer</h3>
+          <p class="company-date">Volofin Service Pvt Ltd | June 2022 - Present</p>
+          <ul>
+            <li>Developed RESTful APIs using Django supporting 5,000+ monthly transactions and critical fintech operations.</li>
+            <li>Built a repayment system automating supplier settlements, reducing manual errors by ~25%.</li>
+            <li>Created backend APIs directly from Figma designs and product requirements, improving frontend-backend collaboration.</li>
+            <li>Developed a dynamic Excel export utility using xlwt and utilized Pandas for automated document creation and data manipulation.</li>
+            <li>Integrated third-party APIs for PAN verification to streamline compliance.</li>
+            <li>Utilized Docker and AWS services (EC2, S3, Lambda, DynamoDB, API Gateway) to deploy scalable, reliable backend solutions.</li>
+            <li>Familiar with frontend technologies (HTML, CSS, JavaScript) to support UI collaboration.</li>
+            <li>Led code reviews and implemented testing practices, improving code quality and reducing bugs.</li>
+            <li>Participated actively in Agile/Scrum processes, contributing to timely feature delivery.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="education">
+        <h2>Education</h2>
+        <p><strong>BE Computer Science</strong> — Visvesvarayya Technology University (2016 - 2020)</p>
+      </section>
+
+      <section>
+        <h2>Project</h2>
+        <h3>
+          <a href="https://github.com/San97-12/portfolio" target="_blank" rel="noopener noreferrer">
+            Serverless Resume Website with Visitor Counter
+          </a>
+        </h3>
+        <ul>
+          <li>
+            Developed and deployed a full-stack serverless web application on AWS using S3, CloudFront, Lambda, DynamoDB, and API Gateway;
+            implemented CI/CD with GitHub Actions and automated infrastructure provisioning with Terraform, resulting in a secure,
+            scalable personal resume website with real-time visitor analytics.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ✅ Visitor Count Section -->
+      <div id="visitor-count" style="text-align:center; margin-top: 30px; font-size: 16px; color: #444;">
+        Loading visitor count...
+      </div>
+    </main>
+  </div>
+
+  <!-- ✅ JavaScript to Fetch Visitor Count -->
+  <script>
+    async function getVisitorCount() {
+      try {
+        const response = await fetch('https://31ejchenol.execute-api.eu-north-1.amazonaws.com/resume-prod/resume-view');
+        const data = await response.json();
+        const count = data.views || (data.body && JSON.parse(data.body).views);
+        document.getElementById('visitor-count').innerText = `Visitor count: ${count}`;
+      } catch (error) {
+        console.error('Visitor count fetch error:', error);
+        document.getElementById('visitor-count').innerText = 'Unable to load visitor count';
+      }
+    }
+  window.onload = getVisitorCount;
+  </script>
+</body>
+</html>

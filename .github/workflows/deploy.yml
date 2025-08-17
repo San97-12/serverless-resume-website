@@ -32,27 +32,22 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.LAMBDA_REGION }}
+          aws-region: eu-north-1
 
       - name: Deploy Lambda function
         run: |
           aws lambda update-function-code \
             --function-name ${{ secrets.LAMBDA_FUNCTION }} \
             --zip-file fileb://function.zip \
-            --region ${{ secrets.LAMBDA_REGION }}
+            --region eu-north-1
 
       - name: Configure AWS credentials (S3 region)
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.S3_REGION }}
+          aws-region: us-east-1
 
       - name: Sync static site to S3
         run: |
-          aws s3 sync ./ s3://${{ secrets.BUCKET_NAME }} --delete --exclude ".git/*" --exclude "lambda/*" --exclude "terra/*" --exclude ".github/*"
-
-      - name: Debug regions
-        run: |
-          echo "S3_REGION=${{ secrets.S3_REGION }}"
-          echo "LAMBDA_REGION=${{ secrets.LAMBDA_REGION }}"
+          aws s3 sync ./ s3://${{ secrets.BUCKET_NAME }} --delete --exclude ".git/*" --exclude "lambda/*" --exclude ".github/*"

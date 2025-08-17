@@ -4,7 +4,7 @@ from decimal import Decimal
 
 def lambda_handler(event, context):
     try:
-        dynamodb = boto3.resource('dynamodb', region_name='eu-north-1')
+        dynamodb = boto3.resource('dynamodb', region_name='eu-east-1')
         print("Connecting to table: pageviewresume in region eu-north-1")
 
         table = dynamodb.Table('pageviewresume')

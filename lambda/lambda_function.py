@@ -1,9 +1,11 @@
+import os
 import boto3
 import json
 from decimal import Decimal
 
+table_name = os.environ['TABLE_NAME']
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('pageviewresume')
+table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
     try:

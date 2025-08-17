@@ -2,11 +2,13 @@ import boto3
 import json
 from decimal import Decimal
 
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-table = dynamodb.Table('pageviewresume')
-
 def lambda_handler(event, context):
     try:
+        dynamodb = boto3.resource('dynamodb', region_name='eu-north-1')
+        print("Connecting to table: pageviewresume in region eu-north-1")
+
+        table = dynamodb.Table('pageviewresume')
+
         response = table.update_item(
             Key={'id': 'counter'},
             UpdateExpression='SET #v = if_not_exists(#v, :start) + :inc',
@@ -19,9 +21,8 @@ def lambda_handler(event, context):
             },
             ReturnValues='UPDATED_NEW'
         )
-        views = response['Attributes']['views']
 
-        # Convert Decimal to int
+        views = response['Attributes']['views']
         if isinstance(views, Decimal):
             views = int(views)
 
@@ -32,7 +33,9 @@ def lambda_handler(event, context):
                 'Content-Type': 'application/json'
             }
         }
+
     except Exception as e:
+        print("ERROR:", str(e))
         return {
             'statusCode': 500,
             'body': json.dumps({'error': str(e)}),

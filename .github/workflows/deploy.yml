@@ -37,10 +37,10 @@ jobs:
       - name: Deploy Lambda function
         run: |
           aws lambda update-function-code \
-            --function-name updatecounterfunction \
+            --function-name ${{secrets.LAMBDA_FUNCTION}} \
             --zip-file fileb://function.zip \
             --region eu-north-1
 
       - name: Deploy to S3
         run: |
-          aws s3 sync ./ s3://myresumelearnbucket --exclude ".git/*" --exclude ".github/*" --delete
+          aws s3 sync ./ s3://${{secrets.BUCKET_NAME}} --exclude ".git/*" --exclude ".github/*" --delete

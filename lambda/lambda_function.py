@@ -16,11 +16,10 @@ def lambda_handler(event, context):
         )
         views = response['Attributes']['views']
         if isinstance(views, Decimal):
-            views = int(views)
         
         return {
             'statusCode': 200,
-            'body': json.dumps({'views': views}),
+            'body': json.dumps({'views': int(views)}),
             'headers': {'Content-Type': 'application/json'}
         }
     except Exception as e:

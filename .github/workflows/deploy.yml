@@ -1,9 +1,9 @@
-name: Deploy Static Site to S3
+name: Deploy to S3 and Lambda
 
 on:
   push:
     branches:
-      - main  # or your deploy branch
+      - main
 
 jobs:
   deploy:
@@ -11,15 +11,36 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install zip utility
+        run: sudo apt-get install zip
+
+      - name: Zip Lambda function
+        run: |
+          cd lambda
+          zip -r ../function.zip .
+          cd ..
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  
+
+      - name: Deploy Lambda function
+        run: |
+          aws lambda update-function-code \
+            --function-name updatecounterfunction \
+            --zip-file fileb://function.zip \
+            --region us-east-1
 
       - name: Deploy to S3
-        uses: jakejarvis/s3-sync-action@master
-        with:
-          args: --delete
-        env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: 'us-east-1'        # Change if needed
-          SOURCE_DIR: '.'               # Upload everything from root directory
+        run: |
+          aws s3 sync ./ s3://myresumelearnbucket --exclude ".git/*" --exclude ".github/*" --delete

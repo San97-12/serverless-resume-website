@@ -16,7 +16,7 @@ The frontend is hosted on **GitHub Pages**, and the backend is powered by **AWS 
 
 ## Live Demo
 
-🔗 [https://san97-12.github.io/serverless-resume-website/]
+🔗 https://san97-12.github.io/serverless-resume-website/
 
 ## Key Features
 

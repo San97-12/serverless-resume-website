@@ -39,7 +39,7 @@ jobs:
           aws lambda update-function-code \
             --function-name updatecounterfunction \
             --zip-file fileb://function.zip \
-            --region us-east-1
+            --region eu-north-1
 
       - name: Deploy to S3
         run: |
